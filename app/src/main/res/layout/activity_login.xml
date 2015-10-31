@@ -37,7 +37,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="login"/>
+            android:text="login"
+            android:id="@+id/login" />
 
         <TextView
             android:layout_width="wrap_content"
