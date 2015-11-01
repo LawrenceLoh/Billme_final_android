@@ -10,6 +10,4 @@
     tools:showIn="@layout/app_bar_activity_main"
     tools:context="com.example.loh.billme_final_android.Activity_main">
 
-
-
 </RelativeLayout>

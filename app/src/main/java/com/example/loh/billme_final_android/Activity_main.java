@@ -1,10 +1,13 @@
 package com.example.loh.billme_final_android;
 
+import android.app.ActionBar;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
@@ -33,6 +37,7 @@ public class Activity_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -40,8 +45,9 @@ public class Activity_main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Toast.makeText(Activity_main.this, "add not ready yet", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -53,49 +59,6 @@ public class Activity_main extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-//        ImageView imageView= new ImageView(this);
-//        imageView.setImageResource(R.mipmap.ic_action_new);
-//
-//        //set the main button
-//        com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton actionButton = new com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton.Builder(this)
-//                .setContentView(imageView)
-//                .setBackgroundDrawable(R.drawable.button_action_blue_selector)
-//                .build();
-//
-//
-//        //set the sub button
-//        ImageView subbutton1 = new ImageView(this);
-//        subbutton1.setImageResource(android.R.drawable.ic_menu_week);
-//        ImageView subbutton2 = new ImageView(this);
-//        subbutton2.setImageResource(android.R.drawable.ic_menu_camera);
-//        ImageView subbutton3 = new ImageView(this);
-//        subbutton3.setImageResource(android.R.drawable.ic_media_ff);
-//        ImageView subbutton4 = new ImageView(this);
-//        subbutton4.setImageResource(android.R.drawable.ic_dialog_alert);
-//
-//        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-//        itemBuilder.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_action_blue_selector));
-//
-//        SubActionButton button1 = itemBuilder.setContentView(subbutton1).build();
-//        SubActionButton button2 = itemBuilder.setContentView(subbutton2).build();
-//        SubActionButton button3 = itemBuilder.setContentView(subbutton3).build();
-//        SubActionButton button4 = itemBuilder.setContentView(subbutton4).build();
-//
-//        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
-//                .addSubActionView(button1)
-//                .addSubActionView(button2)
-//                .addSubActionView(button3)
-//                .addSubActionView(button4)
-//                .attachTo(actionButton)
-//                .build();
-//
-//        subbutton1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(Activity_main.this, "success", Toast.LENGTH_SHORT).show();
-//            }
-//        });
         initView();
     }
 
@@ -124,9 +87,9 @@ public class Activity_main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -160,8 +123,8 @@ public class Activity_main extends AppCompatActivity
         mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
         mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
         mWaveSwipeRefreshLayout.setOnRefreshListener(this);
-        mWaveSwipeRefreshLayout.setWaveColor(Color.BLUE);
-        //mWaveSwipeRefreshLayout.setMaxDropHeight(1500);
+        mWaveSwipeRefreshLayout.setWaveColor(Color.BLACK);
+        mWaveSwipeRefreshLayout.setMaxDropHeight(1500);
 
         mListview = (ListView) findViewById(R.id.mainlist);
     }
