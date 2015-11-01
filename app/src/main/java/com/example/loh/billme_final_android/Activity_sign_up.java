@@ -20,6 +20,8 @@ import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Activity_sign_up extends AppCompatActivity {
 
     private Button signUp;
@@ -28,6 +30,7 @@ public class Activity_sign_up extends AppCompatActivity {
     private EditText password;
     public String txt_name,txt_email,txt_password;
     ProgressDialog pd;
+    private CircleImageView Img_upload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +98,14 @@ public class Activity_sign_up extends AppCompatActivity {
                     Toast.makeText(Activity_sign_up.this, "Please check your network connection and try again", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        Img_upload= (CircleImageView) findViewById(R.id.uploadPhoto);
+        Img_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Activity_sign_up.this, "waiting for it ", Toast.LENGTH_SHORT).show();
             }
         });
 

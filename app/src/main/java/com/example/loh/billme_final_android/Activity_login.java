@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
@@ -21,6 +22,7 @@ public class Activity_login extends Activity {
     Button btn_login;
     EditText Etxt_email;
     EditText Etxt_password;
+    TextView Vtxt_sign_up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,15 @@ public class Activity_login extends Activity {
             }
         });
 
+        Vtxt_sign_up = (TextView) findViewById(R.id.login_sign_up_button);
+        Vtxt_sign_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Activity_login.this,Activity_sign_up.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
