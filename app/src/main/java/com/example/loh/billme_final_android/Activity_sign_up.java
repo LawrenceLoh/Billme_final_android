@@ -15,15 +15,5 @@ public class Activity_sign_up extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        Button go =(Button)findViewById(R.id.go);
-
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Activity_sign_up.this, Activity_mainPage.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 }

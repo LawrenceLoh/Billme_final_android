@@ -19,7 +19,7 @@ public class Activity_login extends Activity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Activity_login.this,Activity_mainPage.class);
+                Intent intent = new Intent(Activity_login.this,Activity_main.class);
                 startActivity(intent);
                 finish();
             }
