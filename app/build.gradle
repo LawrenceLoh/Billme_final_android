@@ -30,4 +30,6 @@ dependencies {
     compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.2'
     compile 'com.android.support:design:23.0.1'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.edmodo:cropper:1.0.1'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 }
