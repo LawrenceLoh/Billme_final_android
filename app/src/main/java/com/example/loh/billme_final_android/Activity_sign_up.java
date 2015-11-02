@@ -51,6 +51,7 @@ public class Activity_sign_up extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+
         signUp = (Button)findViewById(R.id.sign_up_button);
         name = (EditText)findViewById(R.id.sign_up_name);
         email= (EditText)findViewById(R.id.sign_up_email);
