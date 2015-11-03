@@ -58,11 +58,10 @@ public class Activity_crop_profile extends Activity {
     private void handleCrop(int resultCode, Intent result) {
         if (resultCode == RESULT_OK) {
 
-         resultView.setImageURI(Crop.getOutput(result));
-
-//            Intent intent = new Intent(Activity_crop_profile.this,Activity_sign_up.class);
-//            intent.putExtra("imageUri", Crop.getOutput(result).toString());
-//            startActivity(intent);
+            //setData pass uri back to sisn up activity
+            Intent intent = new Intent(Activity_crop_profile.this,Activity_sign_up.class);
+            intent.setData(Crop.getOutput(result));
+            startActivity(intent);
 
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();

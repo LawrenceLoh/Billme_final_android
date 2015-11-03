@@ -1,6 +1,8 @@
 package com.example.loh.billme_final_android.Parse_subclass;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseUser;
 
 /**
@@ -29,6 +31,17 @@ public class User extends ParseUser {
     }
     public void setFullname(String fullname){
         put("fullname",fullname);
+    }
+    public void setProfile(ParseFile profile) {
+        put("profile", profile);
+        try {
+            profile.save();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    public ParseFile getProfile() {
+        return getParseFile("profile");
     }
 
 }
