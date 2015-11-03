@@ -1,9 +1,12 @@
 package com.example.loh.billme_final_android;
 
-import android.graphics.Color;
+import android.app.ActionBar;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -12,24 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import jp.co.recruit_lifestyle.android.widget.WaveSwipeRefreshLayout;
+import com.baoyz.widget.PullRefreshLayout;
 
-public class Activity_main extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,WaveSwipeRefreshLayout.OnRefreshListener {
+public class Activity_main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private ListView mListview;
-    private WaveSwipeRefreshLayout mWaveSwipeRefreshLayout;
-
+    private PullRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,21 +34,36 @@ public class Activity_main extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Toast.makeText(Activity_main.this, "add not ready yet", Toast.LENGTH_SHORT).show();
+
+                refresh.setRefreshing(false);
             }
         });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        initView();
+
+        SpannableString s = new SpannableString("main page");
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "century-gothic.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+        actionBar.setTitle(s);
+
+        refresh = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        refresh.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
+        refresh.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(Activity_main.this, "refreshing", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
@@ -79,9 +91,9 @@ public class Activity_main extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.action_settings) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -109,35 +121,5 @@ public class Activity_main extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void initView() {
-        mWaveSwipeRefreshLayout = (WaveSwipeRefreshLayout) findViewById(R.id.main_swipe);
-        mWaveSwipeRefreshLayout.setColorSchemeColors(Color.WHITE, Color.WHITE);
-        mWaveSwipeRefreshLayout.setOnRefreshListener(this);
-        mWaveSwipeRefreshLayout.setWaveColor(Color.BLACK);
-        mWaveSwipeRefreshLayout.setMaxDropHeight(1500);
-
-        mListview = (ListView) findViewById(R.id.mainlist);
-    }
-
-    @Override
-    public void onRefresh() {
-        refresh();
-    }
-
-    @Override
-    protected void onResume() {
-        refresh();
-        super.onResume();
-    }
-
-    private void refresh(){
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mWaveSwipeRefreshLayout.setRefreshing(false);
-            }
-        }, 1000);
     }
 }

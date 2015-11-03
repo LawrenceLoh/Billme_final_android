@@ -34,15 +34,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
         <activity
             android:name=".Activity_crop_profile"
             android:label="@string/title_activity_activity_crop_profile"
-            android:theme="@style/Animation.AppCompat.DropDownUp"
-            >
+            android:theme="@style/Animation.AppCompat.DropDownUp" >
         </activity>
-
     </application>
 
 </manifest>
