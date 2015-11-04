@@ -1,6 +1,7 @@
 package com.example.loh.billme_final_android;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,9 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
             public void onClick(View view) {
 
                 refresh.setRefreshing(false);
+                Intent intent = new Intent(Activity_main.this,Activity_add_bill.class);
+                startActivity(intent);
+
             }
         });
 
