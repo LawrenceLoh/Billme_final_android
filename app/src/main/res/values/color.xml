@@ -2,6 +2,9 @@
 <resources>
     <color name="old_bg">#F48B1F</color>
     <color name="black">#000</color>
+    <color name="logo_green">#2E7D32</color>
+    <color name="white">#fff</color>
+    <color name='light_green'>#1B5E20</color>
 
 
 </resources>

@@ -52,8 +52,8 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        SpannableString s = new SpannableString("home");
-        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "century-gothic.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString s = new SpannableString("Home");
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         android.support.v7.app.ActionBar actionBar =getSupportActionBar();
         actionBar.setTitle(s);

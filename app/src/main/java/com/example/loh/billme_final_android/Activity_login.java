@@ -2,8 +2,10 @@ package com.example.loh.billme_final_android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,20 +19,34 @@ import com.parse.ParseUser;
 
 import java.text.ParseException;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class Activity_login extends Activity {
 
-    Button btn_login;
-    EditText Etxt_email;
-    EditText Etxt_password;
     TextView Vtxt_sign_up;
+
+    @Bind(R.id.login_button)Button btn_login;
+    @Bind(R.id.login_email)EditText Etxt_email;
+    @Bind(R.id.login_password)EditText Etxt_password;
+    @Bind(R.id.login_sign_up_button)TextView btn_sign_up;
+    @Bind(R.id.login_content)CardView card_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btn_login= (Button) findViewById(R.id.login_button);
-        Etxt_email = (EditText) findViewById(R.id.login_email);
-        Etxt_password= (EditText) findViewById(R.id.login_password);
+
+        ButterKnife.bind(this);
+        Typeface mTypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "nord.ttf");
+
+        btn_login.setTypeface(mTypeface);
+        Etxt_email.setTypeface(mTypeface);
+        Etxt_password.setTypeface(mTypeface);
+        btn_sign_up.setTypeface(mTypeface);
+
+        card_content.setBackgroundColor(getResources().getColor(R.color.white));
+
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +66,7 @@ public class Activity_login extends Activity {
                                     startActivity(intent);
                                     Toast.makeText(getApplicationContext(), "Successfully Logged in", Toast.LENGTH_LONG).show();
                                     finish();
+                                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "No such user exist, please signup", Toast.LENGTH_LONG).show();
                                 }
@@ -65,6 +82,7 @@ public class Activity_login extends Activity {
                 Intent intent = new Intent(Activity_login.this,Activity_sign_up.class);
                 startActivity(intent);
                 finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
     }
