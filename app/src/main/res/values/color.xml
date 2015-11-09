@@ -6,6 +6,7 @@
     <color name="white">#fff</color>
     <color name='light_green'>#1B5E20</color>
     <color name="white_green">#81C784</color>
+    <color name="action_bar_green">#4CAF50</color>
 
 
 </resources>
