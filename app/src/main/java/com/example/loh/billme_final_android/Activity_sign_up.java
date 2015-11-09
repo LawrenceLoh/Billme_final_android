@@ -79,7 +79,7 @@ public class Activity_sign_up extends AppCompatActivity {
         newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);
         sign_up_detail= (LinearLayout) findViewById(R.id.sign_up_detail);
         sign_up_content.setBackgroundColor(getResources().getColor(R.color.white));
-
+        
 
 
 
@@ -213,6 +213,7 @@ public class Activity_sign_up extends AppCompatActivity {
     }
     public void onChooseProfilePicture(View view) {
         Crop.pickImage(this);
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent result) {
@@ -232,15 +233,14 @@ public class Activity_sign_up extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
 
             uri = Crop.getOutput(result);
+            Img_upload.setImageDrawable(null);
+            Img_upload.setImageURI(uri);
+            set_profile();
 
         } else if (resultCode == Crop.RESULT_ERROR) {
             Toast.makeText(this, Crop.getError(result).getMessage(), Toast.LENGTH_SHORT).show();
         }
 
-        if(uri!=null) {
-            Img_upload.setImageURI(uri);
-            set_profile();
-        }
     }
 
 }

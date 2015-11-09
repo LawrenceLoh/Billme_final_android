@@ -40,6 +40,7 @@ public class User extends ParseUser {
             e.printStackTrace();
         }
     }
+
     public ParseFile getProfile() {
         return getParseFile("profile");
     }

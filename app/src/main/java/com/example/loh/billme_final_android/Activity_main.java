@@ -2,6 +2,7 @@ package com.example.loh.billme_final_android;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,14 +17,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
+import com.example.loh.billme_final_android.Parse_subclass.User;
+import com.parse.Parse;
+import com.parse.ParseUser;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Activity_main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private PullRefreshLayout refresh;
 
+
+    @Bind(R.id.content_profile_pic)CircleImageView content_profile_pic;
+    @Bind(R.id.content_fullname)TextView content_fullname;
+    @Bind(R.id.content_email)TextView content_email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +53,7 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
             public void onClick(View view) {
 
                 refresh.setRefreshing(false);
-                Intent intent = new Intent(Activity_main.this,Activity_add_bill.class);
+                Intent intent = new Intent(Activity_main.this, Activity_add_bill.class);
                 startActivity(intent);
 
             }
@@ -57,6 +73,17 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
 
         android.support.v7.app.ActionBar actionBar =getSupportActionBar();
         actionBar.setTitle(s);
+        //Bind all,professionally
+        ButterKnife.bind(this);
+
+        Typeface mTypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "nord.ttf");
+
+        User user = (User) ParseUser.getCurrentUser();
+        Picasso.with(this).load(user.getProfile().getUrl()).into(content_profile_pic);
+        content_fullname.setText(sort_name(user.getFullName()));
+        content_email.setText(user.getUsername());
+        content_email.setTypeface(mTypeface);
+        content_fullname.setTypeface(mTypeface);
 
         refresh = (PullRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         refresh.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
@@ -111,6 +138,8 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         if (id == R.id.nav_camara) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
+            Intent intent = new Intent(Activity_main.this,Activity_add_bill.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -125,5 +154,14 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public StringBuilder sort_name(String fullname){
+        String myFullname =fullname.toUpperCase();
+
+        StringBuilder myName = new StringBuilder(fullname);
+        myName.setCharAt(0, myFullname.charAt(0));
+
+        return myName;
     }
 }
