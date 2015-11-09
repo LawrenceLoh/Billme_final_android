@@ -134,7 +134,8 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_search) {
+        if (id == R.id.menu_multiple) {
+            Toast.makeText(Activity_main.this, "you want to create a room? ", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -147,27 +148,17 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
+        if (id == R.id.nav_friend) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Intent intent = new Intent(Activity_main.this,Activity_add_bill.class);
-            startActivity(intent);
+        } else if (id == R.id.nav_group) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_logout) {
+        }  else if (id == R.id.nav_logout) {
             ParseUser.getCurrentUser().logOut();
             Intent intent = new Intent(Activity_main.this, Activity_login.class);
             startActivity(intent);
             finish();
 
         }
-
-//else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

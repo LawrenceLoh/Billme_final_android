@@ -2,12 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_camara" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Import" />
-        <item android:id="@+id/nav_gallery" android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item android:id="@+id/nav_slideshow" android:icon="@android:drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+        <item android:id="@+id/nav_friend" android:icon="@mipmap/ic_account_star"
+            android:title="Friends" />
+        <item android:id="@+id/nav_group" android:icon="@mipmap/ic_account_multiple"
+            android:title="Groups" />
         <item android:id="@+id/nav_logout" android:icon="@mipmap/ic_exit_to_app"
             android:title="Logout" />
     </group>

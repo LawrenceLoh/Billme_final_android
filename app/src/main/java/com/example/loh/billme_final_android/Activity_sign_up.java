@@ -149,7 +149,7 @@ public class Activity_sign_up extends AppCompatActivity {
                     parseInstallation.saveEventually();
                     user.signUpInBackground(new SignUpCallback() {
                         public void done(ParseException e) {
-                            newtonCradleLoading.start();
+                            newtonCradleLoading.stop();
                             if (e == null) {
 
                                 String picName = txt_name + ".jpg";

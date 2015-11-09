@@ -30,7 +30,6 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
-
         <activity android:name=".Activity_add_bill" >
         </activity>
         <activity android:name=".Activity_status" >
@@ -41,15 +40,15 @@
             </intent-filter>
         </activity>
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
-
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/search"
-            android:theme="@style/Theme.MyCompatTheme">
+            android:theme="@style/Theme.MyCompatTheme" >
 
             <!-- to identify this activity as "searchable" -->
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -57,7 +56,8 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
+        <activity android:name=".Activity_friend_list" >
+        </activity>
     </application>
 
 </manifest>

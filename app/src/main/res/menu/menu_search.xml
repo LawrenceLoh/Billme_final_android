@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appcompat="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/menu_back"
+        android:title="room"
+        android:icon="@mipmap/ic_arrow_left"
+        appcompat:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="search"
+        appcompat:actionViewClass="android.support.v7.widget.SearchView"
+        appcompat:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menu_multiple"
+        android:title="room"
+        android:icon="@mipmap/ic_account_multiple_plus"
+        appcompat:showAsAction="always"/>
+
+
+
+</menu>
