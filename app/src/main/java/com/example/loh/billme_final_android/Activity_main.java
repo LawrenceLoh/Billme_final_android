@@ -149,7 +149,9 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_friend) {
-            // Handle the camera action
+            Intent intent = new Intent(Activity_main.this,Activity_friend_list.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_group) {
 
         }  else if (id == R.id.nav_logout) {

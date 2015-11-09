@@ -24,19 +24,20 @@ import java.util.List;
 /**
  * Created by Loh on 9/11/2015.
  */
-public class Adapter_searchUser extends BaseAdapter {
+public class Adapter_search_user extends BaseAdapter {
 
     private Context mContext;
     private List<User> users= new ArrayList<User>();
     private LayoutInflater inflater;
     private int numberOfFollowingInSearchResult;
 
-    public Adapter_searchUser(Context c, List<User> users, int numberOfFollowingInSearchResult) {
+    public Adapter_search_user(Context c, List<User> users, int numberOfFollowingInSearchResult) {
         mContext = c;
         this.users = users;
         inflater = LayoutInflater.from(c);
         this.numberOfFollowingInSearchResult=numberOfFollowingInSearchResult;
     }
+
 
     @Override
     public int getCount() {

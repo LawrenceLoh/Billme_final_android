@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.loh.billme_final_android.Parse_subclass.Follow;
 import com.example.loh.billme_final_android.Parse_subclass.User;
@@ -128,9 +127,9 @@ public class SearchResultsActivity extends ActionBarActivity {
                                     searchedUser_Following.addAll(searchedUser_Not_Following);
 
                                     if(searchedUser_Following.size()!=0){
-                                        list_search_result.setAdapter(new Adapter_searchUser(getApplicationContext(), searchedUser_Following, numberOfFollowingInSearchResult));
+                                        list_search_result.setAdapter(new Adapter_search_user(getApplicationContext(), searchedUser_Following, numberOfFollowingInSearchResult));
                                     }else{
-                                        list_search_result.setAdapter(new Adapter_searchUser(getApplicationContext(), searchUserResult, numberOfFollowingInSearchResult));
+                                        list_search_result.setAdapter(new Adapter_search_user(getApplicationContext(), searchUserResult, numberOfFollowingInSearchResult));
                                     }
                                     search_layout.setBackgroundColor(getResources().getColor(R.color.white));
                                     search_newton_cradle_loading.stop();
