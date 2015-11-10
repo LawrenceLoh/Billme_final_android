@@ -6,6 +6,8 @@
             android:title="Friends" />
         <item android:id="@+id/nav_group" android:icon="@mipmap/ic_account_multiple"
             android:title="Groups" />
+        <item android:id="@+id/nav_invite" android:icon="@mipmap/ic_comment_account_outline"
+            android:title="Invites" />
         <item android:id="@+id/nav_logout" android:icon="@mipmap/ic_exit_to_app"
             android:title="Logout" />
     </group>

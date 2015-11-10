@@ -156,7 +156,12 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
             finish();
         } else if (id == R.id.nav_group) {
 
-        }  else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_invite) {
+            Intent intent= new Intent(Activity_main.this,Activity_invite_list.class);
+            startActivity(intent);
+            finish();
+
+        } else if (id == R.id.nav_logout) {
             ParseUser.getCurrentUser().logOut();
             Intent intent = new Intent(Activity_main.this, Activity_login.class);
             startActivity(intent);
