@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,11 +14,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.example.loh.billme_final_android.Parse_subclass.Follow;
+import com.example.loh.billme_final_android.Parse_subclass.Group;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -104,6 +108,42 @@ public class Activity_group_invite extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.menu_confirm) {
+            final String groupname = group_invite_group_name.getText().toString();
+            Log.d("groupname", groupname);
+
+
+            if(groupname.length()>0){
+                ParseQuery<Group> group_list = ParseQuery.getQuery(Group.class);
+                group_list.whereEqualTo("GroupFromUser", ParseUser.getCurrentUser());
+                group_list.include("GroupToUser");
+                group_list.findInBackground(new FindCallback<Group>() {
+                    @Override
+                    public void done(List<Group> list, ParseException e) {
+
+                        for(Group member : list){
+                            member.setGroupName(groupname);
+                            member.saveEventually();
+                        }
+                        Toast.makeText(Activity_group_invite.this, "Group- "+groupname+" created!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Activity_group_invite.this,Activity_main.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                });
+
+
+
+            }else{
+                Toast.makeText(Activity_group_invite.this, "Please insert group name!", Toast.LENGTH_SHORT).show();
+            }
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
+
 }
