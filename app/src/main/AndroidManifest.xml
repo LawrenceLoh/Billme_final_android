@@ -63,7 +63,11 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
-        <activity android:name=".Activity_group_invite" >
+        <activity android:name=".Activity_group_invite"
+            android:theme="@style/Theme.MyCompatTheme">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
     </application>
 

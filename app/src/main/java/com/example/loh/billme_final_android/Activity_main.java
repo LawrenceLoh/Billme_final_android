@@ -135,7 +135,9 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_multiple) {
-            Toast.makeText(Activity_main.this, "you want to create a room? ", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Activity_main.this,Activity_group_invite.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 

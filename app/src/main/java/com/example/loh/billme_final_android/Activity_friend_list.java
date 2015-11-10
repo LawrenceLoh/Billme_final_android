@@ -36,6 +36,7 @@ public class Activity_friend_list extends AppCompatActivity {
     @Bind(R.id.friend_list)ListView friendList;
     @Bind(R.id.friend_list_layout)RelativeLayout friend_list_layout;
     @Bind(R.id.friend_list_swipeRefreshLayout)PullRefreshLayout friend_list_swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
