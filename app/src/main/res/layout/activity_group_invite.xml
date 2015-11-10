@@ -29,20 +29,13 @@
             android:textColor="@color/logo_green"/>
     </android.support.design.widget.TextInputLayout>
 
-    <com.baoyz.widget.PullRefreshLayout
-        android:id="@+id/group_invite_swipeRefreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/group_invite_text_layout"
-        >
-
         <ListView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/group_invite_list"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_below="@+id/group_invite_text_layout"
+            android:layout_alignParentStart="true" />
 
-    </com.baoyz.widget.PullRefreshLayout>
+
 
 </RelativeLayout>

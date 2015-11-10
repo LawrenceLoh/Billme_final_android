@@ -9,7 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.loh.billme_final_android.Parse_subclass.Follow;
+import com.example.loh.billme_final_android.Parse_subclass.Group;
 import com.example.loh.billme_final_android.Parse_subclass.User;
+import com.parse.FindCallback;
+import com.parse.ParseACL;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -58,7 +65,7 @@ public class Adapter_group_invite extends BaseAdapter {
         }
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         final ViewHolder holder;
 
@@ -77,6 +84,45 @@ public class Adapter_group_invite extends BaseAdapter {
         }else{
             holder.btn_follow.setSelected(true);
         }
+
+        holder.btn_follow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.btn_follow.setSelected(!holder.btn_follow.isSelected());
+                if (holder.btn_follow.isSelected()) {
+                    //Handle selected state change
+                    ParseACL aCL = new ParseACL(ParseUser.getCurrentUser());
+                    aCL.setPublicReadAccess(true);
+                    //Add new follow relation
+                    Group group = new Group();
+                    group.setACL(aCL);
+                    group.setGroupFromUser((User) ParseUser.getCurrentUser());
+                    group.setGroupToUser(users.get(position));
+                    group.saveEventually();
+                } else {
+                    //Handle de-select state change
+                    //Query rows where "fromUser" is current User AND "toUser" is selected User and delete
+                    //To remove following relation ship of current User and selected User
+
+                    ParseQuery<Group> group = ParseQuery.getQuery(Group.class);
+                    group.whereEqualTo("GroupFromUser", ParseUser.getCurrentUser());
+                    group.whereEqualTo("GroupToUser", users.get(position));
+
+                    group.findInBackground(new FindCallback<Group>() {
+                        @Override
+                        public void done(List<Group> groups, ParseException e) {
+                            if (e == null) {
+                                for(Group group:groups){
+                                    group.deleteEventually();
+                                }
+                            } else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }
+        });
         return v;
     }
 }

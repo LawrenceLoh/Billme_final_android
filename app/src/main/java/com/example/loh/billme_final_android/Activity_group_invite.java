@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -34,7 +35,8 @@ public class Activity_group_invite extends AppCompatActivity {
     @Bind(R.id.group_invite_newton_cradle_loading)NewtonCradleLoading group_invite_newton_cradle_loading;
     @Bind(R.id.group_invite_list)ListView group_invite_list;
     @Bind(R.id.group_invite_layout)RelativeLayout group_invite_layout;
-    @Bind(R.id.group_invite_swipeRefreshLayout)PullRefreshLayout group_invite_swipeRefreshLayout;
+    @Bind(R.id.group_invite_group_name)EditText group_invite_group_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,16 +46,6 @@ public class Activity_group_invite extends AppCompatActivity {
         onLoadingStart();
         loadFriendsList();
 
-
-        group_invite_swipeRefreshLayout.setRefreshStyle(PullRefreshLayout.STYLE_MATERIAL);
-        group_invite_swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                followedFriend.clear();
-                loadFriendsList();
-                group_invite_swipeRefreshLayout.setRefreshing(false);
-            }
-        });
     }
 
     public void loadFriendsList(){
@@ -73,6 +65,7 @@ public class Activity_group_invite extends AppCompatActivity {
                 group_invite_newton_cradle_loading.stop();
                 group_invite_newton_cradle_loading.setVisibility(View.GONE);
                 group_invite_layout.setBackgroundColor(getResources().getColor(R.color.white));
+                group_invite_group_name.setVisibility(View.VISIBLE);
             }
         });
 
@@ -81,6 +74,7 @@ public class Activity_group_invite extends AppCompatActivity {
         group_invite_newton_cradle_loading.setVisibility(View.VISIBLE);
         group_invite_layout.setBackgroundColor(getResources().getColor(R.color.logo_green));
         group_invite_newton_cradle_loading.start();
+        group_invite_group_name.setVisibility(View.GONE);
     }
 
     @Override

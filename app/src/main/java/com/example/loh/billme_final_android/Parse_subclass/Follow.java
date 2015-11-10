@@ -9,8 +9,8 @@ import com.parse.ParseObject;
 @ParseClassName("Follow")
 public class Follow extends ParseObject {
     public Follow() {
-        // A default constructor is required.
-    }
+    // A default constructor is required.
+}
 
     public User getFromUser(){
         return (User)getParseUser("fromUser");
