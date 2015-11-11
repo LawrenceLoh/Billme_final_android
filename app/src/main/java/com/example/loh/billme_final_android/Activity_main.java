@@ -179,7 +179,7 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         return true;
     }
 
-    public StringBuilder sort_name(String fullname){
+    public static StringBuilder sort_name(String fullname){
         String myFullname =fullname.toUpperCase();
 
         StringBuilder myName = new StringBuilder(fullname);

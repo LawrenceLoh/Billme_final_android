@@ -1,6 +1,7 @@
 package com.example.loh.billme_final_android;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -119,8 +120,35 @@ public class Adapter_invite_list extends BaseAdapter {
                             }
                         }
                     });
-
                 } else {
+
+                    ParseACL aCL = new ParseACL(ParseUser.getCurrentUser());
+                    aCL.setPublicReadAccess(true);
+                    aCL.setPublicWriteAccess(true);
+                    //Add new follow relation
+                    Invite invitation = new Invite();
+                    invitation.setACL(aCL);
+                    invitation.setGroupFromUser(inviteInvitation.get(position).getGroupFromUser());
+                    invitation.setGroupToUser(inviteInvitation.get(position).getGroupToUser());
+                    invitation.setGroupName(inviteInvitation.get(position).getGroupName());
+                    invitation.saveEventually();
+
+                    ParseQuery<Group> groupinvite = ParseQuery.getQuery(Group.class);
+                    groupinvite.whereEqualTo("groupName", inviteInvitation.get(position).getGroupName());
+                    groupinvite.whereEqualTo("member", ParseUser.getCurrentUser());
+                    groupinvite.findInBackground(new FindCallback<Group>() {
+                        @Override
+                        public void done(List<Group> invites, ParseException e) {
+                            if (e == null) {
+                                for (Group invite : invites) {
+                                    invite.deleteEventually();
+                                }
+                            } else {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
 
                 }
             }

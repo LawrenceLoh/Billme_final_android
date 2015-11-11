@@ -1,6 +1,7 @@
 package com.example.loh.billme_final_android;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,11 +58,13 @@ public class Adapter_search_user extends BaseAdapter {
     public class ViewHolder {
         public ImageView img_user_profilePicture;
         public TextView txtview_user_fullName;
+        public TextView txtview_user_email;
         public Button btn_follow;
         public ViewHolder(View view) {
             img_user_profilePicture=(ImageView)view.findViewById(R.id.img_user_profilePicture);
             txtview_user_fullName=(TextView)view.findViewById(R.id.txt_user_fullName);
             btn_follow=(Button)view.findViewById(R.id.btn_follow);
+            txtview_user_email= (TextView) view.findViewById(R.id.txt_user_email);
         }
     }
 
@@ -77,8 +80,14 @@ public class Adapter_search_user extends BaseAdapter {
         } else {
             holder = (ViewHolder) v.getTag();
         }
+        Typeface mTypeface = Typeface.createFromAsset(mContext.getAssets(), "nord.ttf");
 
-        holder.txtview_user_fullName.setText(users.get(position).getFullName());
+        holder.txtview_user_fullName.setText(Activity_main.sort_name(users.get(position).getFullName()));
+        holder.txtview_user_email.setText(users.get(position).getEmail());
+
+        holder.txtview_user_email.setTypeface(mTypeface);
+        holder.txtview_user_fullName.setTypeface(mTypeface);
+
         Picasso.with(mContext).load(users.get(position).getProfile().getUrl()).into(holder.img_user_profilePicture);
         if(position<numberOfFollowingInSearchResult){
             holder.btn_follow.setSelected(true);

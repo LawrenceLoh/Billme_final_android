@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.loh.billme_final_android.Parse_subclass.Follow;
 import com.example.loh.billme_final_android.Parse_subclass.Group;
+import com.example.loh.billme_final_android.Parse_subclass.Invite;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -31,15 +32,12 @@ public class Activity_group extends AppCompatActivity {
 
     private String groupname;
     @Bind(R.id.group_members_list)ListView group_members_list;
-    final List<User> member_followed= new ArrayList<User>();
-    final List<User> member_Not_followed= new ArrayList<User>();
     final List<User> member_list= new ArrayList<User>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_group);
         groupname= getIntent().getStringExtra("groupname");
-        Toast.makeText(Activity_group.this, groupname, Toast.LENGTH_SHORT).show();
         ButterKnife.bind(this);
         onLoadingGroupMember();
     }
@@ -47,7 +45,7 @@ public class Activity_group extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_group, menu);
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
@@ -69,6 +67,28 @@ public class Activity_group extends AppCompatActivity {
             startActivity(intent);
             finish();
             return true;
+        }
+        else if(id == R.id.menu_exit){
+            ParseQuery<Group> group = ParseQuery.getQuery(Group.class);
+            group.whereEqualTo("groupName", groupname);
+            group.whereEqualTo("member",ParseUser.getCurrentUser());
+            group.findInBackground(new FindCallback<Group>() {
+                @Override
+                public void done(List<Group> groupList, ParseException e) {
+                    if (e == null) {
+                        for (Group group : groupList) {
+                            group.deleteEventually();
+                        }
+                    } else {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            Intent intent = new Intent(Activity_group.this,Activity_main.class);
+            startActivity(intent);
+            finish();
+
         }
 
         return super.onOptionsItemSelected(item);

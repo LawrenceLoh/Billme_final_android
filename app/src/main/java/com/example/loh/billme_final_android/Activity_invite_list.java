@@ -41,7 +41,7 @@ public class Activity_invite_list extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_group_invite, menu);
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
@@ -63,6 +63,11 @@ public class Activity_invite_list extends AppCompatActivity {
             startActivity(intent);
             finish();
             return true;
+        }
+        else if(id== R.id.menu_confirm){
+            Intent intent = new Intent(Activity_invite_list.this,Activity_group_list.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

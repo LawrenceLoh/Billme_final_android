@@ -1,11 +1,14 @@
 package com.example.loh.billme_final_android;
 
+import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.SearchView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,6 +45,14 @@ public class SearchResultsActivity extends ActionBarActivity {
         ButterKnife.bind(this);
         handleIntent(getIntent());
 
+        SpannableString s = new SpannableString("Search");
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+        actionBar.setTitle(s);
+
     }
 
     @Override
@@ -69,6 +80,11 @@ public class SearchResultsActivity extends ActionBarActivity {
             startActivity(intent);
             finish();
             return true;
+        }
+        else if(id== R.id.menu_multiple){
+            Intent intent = new Intent(SearchResultsActivity.this,Activity_group_invite.class);
+            startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
