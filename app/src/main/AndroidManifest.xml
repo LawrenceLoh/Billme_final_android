@@ -74,8 +74,11 @@
             android:name=".Activity_invite_list"
             android:theme="@style/Theme.MyCompatTheme" >
         </activity>
-
-        <activity android:name=".Activity_group_list"
+        <activity
+            android:name=".Activity_group_list"
+            android:theme="@style/Theme.MyCompatTheme" >
+        </activity>
+        <activity android:name=".Activity_group"
             android:theme="@style/Theme.MyCompatTheme">
         </activity>
     </application>
