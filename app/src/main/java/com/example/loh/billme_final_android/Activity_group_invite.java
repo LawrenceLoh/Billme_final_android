@@ -16,12 +16,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.baoyz.widget.PullRefreshLayout;
 import com.example.loh.billme_final_android.Parse_subclass.Follow;
-import com.example.loh.billme_final_android.Parse_subclass.Group;
+import com.example.loh.billme_final_android.Parse_subclass.Invite;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
-import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -114,18 +112,19 @@ public class Activity_group_invite extends AppCompatActivity {
 
 
             if(groupname.length()>0){
-                ParseQuery<Group> group_list = ParseQuery.getQuery(Group.class);
+                ParseQuery<Invite> group_list = ParseQuery.getQuery(Invite.class);
                 group_list.whereEqualTo("GroupFromUser", ParseUser.getCurrentUser());
+                group_list.whereEqualTo("groupName",null);
                 group_list.include("GroupToUser");
-                group_list.findInBackground(new FindCallback<Group>() {
+                group_list.findInBackground(new FindCallback<Invite>() {
                     @Override
-                    public void done(List<Group> list, ParseException e) {
+                    public void done(List<Invite> list, ParseException e) {
 
-                        for(Group member : list){
+                        for(Invite member : list){
                             member.setGroupName(groupname);
                             member.saveEventually();
                         }
-                        Toast.makeText(Activity_group_invite.this, "Group- "+groupname+" created!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_group_invite.this, "Invite- "+groupname+" created!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Activity_group_invite.this,Activity_main.class);
                         startActivity(intent);
                         finish();

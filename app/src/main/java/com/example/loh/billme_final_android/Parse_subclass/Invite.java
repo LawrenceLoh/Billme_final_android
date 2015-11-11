@@ -6,9 +6,9 @@ import com.parse.ParseObject;
 /**
  * Created by Loh on 10/11/2015.
  */
-@ParseClassName("Group")
-public class Group extends ParseObject {
-    public Group() {
+@ParseClassName("Invite")
+public class Invite extends ParseObject {
+    public Invite() {
         // A default constructor is required.
     }
 
@@ -34,4 +34,6 @@ public class Group extends ParseObject {
     public String getGroupName(){
         return getString("groupName");
     }
+
+
 }

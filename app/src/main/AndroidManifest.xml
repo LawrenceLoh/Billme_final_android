@@ -70,7 +70,14 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
-        <activity android:name=".Activity_invite_list" >
+        <activity
+            android:name=".Activity_invite_list"
+            android:theme="@style/Theme.MyCompatTheme" >
+        </activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 
