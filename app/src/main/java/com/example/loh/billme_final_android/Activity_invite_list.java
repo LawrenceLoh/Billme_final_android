@@ -11,12 +11,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.example.loh.billme_final_android.Parse_subclass.Follow;
 import com.example.loh.billme_final_android.Parse_subclass.Invite;
+import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -24,7 +27,7 @@ import butterknife.ButterKnife;
 
 public class Activity_invite_list extends AppCompatActivity {
 
-
+    final List<User> host_list= new ArrayList<User>();
     @Bind(R.id.invite_list)ListView invite_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,10 @@ public class Activity_invite_list extends AppCompatActivity {
         group_invitation.findInBackground(new FindCallback<Invite>() {
             @Override
             public void done(List<Invite> inviteInvite, ParseException e) {
-                invite_list.setAdapter(new Adapter_invite_list(getApplicationContext(), inviteInvite, inviteInvite.size()));
+                for (Invite friend : inviteInvite) {
+                    host_list.add(friend.getGroupFromUser());
+                }
+                invite_list.setAdapter(new Adapter_invite_list(getApplicationContext(), inviteInvite,host_list, inviteInvite.size()));
             }
         });
 

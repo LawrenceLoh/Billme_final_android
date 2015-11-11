@@ -92,17 +92,15 @@ public class Adapter_group_invite extends BaseAdapter {
                     //Handle selected state change
                     ParseACL aCL = new ParseACL(ParseUser.getCurrentUser());
                     aCL.setPublicReadAccess(true);
+                    aCL.setPublicWriteAccess(true);
                     //Add new follow relation
                     Invite invite = new Invite();
                     invite.setACL(aCL);
                     invite.setGroupFromUser((User) ParseUser.getCurrentUser());
                     invite.setGroupToUser(users.get(position));
                     invite.saveEventually();
-                } else {
-                    //Handle de-select state change
-                    //Query rows where "fromUser" is current User AND "toUser" is selected User and delete
-                    //To remove following relation ship of current User and selected User
 
+                } else {
                     ParseQuery<Invite> group = ParseQuery.getQuery(Invite.class);
                     group.whereEqualTo("GroupFromUser", ParseUser.getCurrentUser());
                     group.whereEqualTo("GroupToUser", users.get(position));
