@@ -17,9 +17,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.loh.billme_final_android.Parse_subclass.Follow;
+import com.example.loh.billme_final_android.Parse_subclass.Group;
 import com.example.loh.billme_final_android.Parse_subclass.Invite;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -132,7 +134,16 @@ public class Activity_group_invite extends AppCompatActivity {
                     }
                 });
 
-
+                ParseACL aCL = new ParseACL(ParseUser.getCurrentUser());
+                aCL.setPublicReadAccess(true);
+                aCL.setPublicWriteAccess(true);
+                //Add new follow relation
+                Group groupinvite = new Group();
+                groupinvite.setACL(aCL);
+                groupinvite.setMember((User)ParseUser.getCurrentUser());
+                groupinvite.setGroupName(groupname);
+                groupinvite.saveEventually();
+                
 
             }else{
                 Toast.makeText(Activity_group_invite.this, "Please insert group name!", Toast.LENGTH_SHORT).show();

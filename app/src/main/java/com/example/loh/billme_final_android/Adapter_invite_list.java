@@ -96,6 +96,7 @@ public class Adapter_invite_list extends BaseAdapter {
                     //Handle selected state change
                     ParseACL aCL = new ParseACL(ParseUser.getCurrentUser());
                     aCL.setPublicReadAccess(true);
+                    aCL.setPublicWriteAccess(true);
                     //Add new follow relation
                     Group groupinvite = new Group();
                     groupinvite.setACL(aCL);

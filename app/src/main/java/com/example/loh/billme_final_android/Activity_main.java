@@ -156,6 +156,11 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
             finish();
         } else if (id == R.id.nav_group) {
 
+            Intent intent = new Intent(Activity_main.this,Activity_group_list.class);
+            startActivity(intent);
+            finish();
+
+
         } else if (id == R.id.nav_invite) {
             Intent intent= new Intent(Activity_main.this,Activity_invite_list.class);
             startActivity(intent);
