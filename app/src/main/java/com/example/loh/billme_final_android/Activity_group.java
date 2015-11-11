@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.loh.billme_final_android.Parse_subclass.Follow;
 import com.example.loh.billme_final_android.Parse_subclass.Group;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
@@ -30,7 +31,9 @@ public class Activity_group extends AppCompatActivity {
 
     private String groupname;
     @Bind(R.id.group_members_list)ListView group_members_list;
-    final List<User> memberList= new ArrayList<User>();
+    final List<User> member_followed= new ArrayList<User>();
+    final List<User> member_Not_followed= new ArrayList<User>();
+    final List<User> member_list= new ArrayList<User>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,11 +81,11 @@ public class Activity_group extends AppCompatActivity {
         group_list.include("member");
         group_list.findInBackground(new FindCallback<Group>() {
             @Override
-            public void done(List<Group> list, ParseException e) {
-                for(Group member :list){
-                    memberList.add(member.getMember());
+            public void done(final List<Group> list, ParseException e) {
+                for(final Group member :list){
+                    member_list.add(member.getMember());
                 }
-                group_members_list.setAdapter(new Adapter_search_user(getApplicationContext(), memberList, memberList.size()));
+                group_members_list.setAdapter(new Adapter_group(getApplicationContext(), member_list));
             }
         });
     }
