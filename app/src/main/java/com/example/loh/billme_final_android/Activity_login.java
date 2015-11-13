@@ -2,6 +2,7 @@ package com.example.loh.billme_final_android;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,8 +46,8 @@ public class Activity_login extends Activity {
         Etxt_password.setTypeface(mTypeface);
         btn_sign_up.setTypeface(mTypeface);
 
-        card_content.setBackgroundColor(getResources().getColor(R.color.white));
-
+        card_content.setCardBackgroundColor(Color.parseColor("#ffffff"));
+        card_content.setRadius(50);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override

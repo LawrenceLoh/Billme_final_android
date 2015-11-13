@@ -1,6 +1,7 @@
 package com.example.loh.billme_final_android;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,9 @@ import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Loh on 10/11/2015.
@@ -28,12 +31,15 @@ public class Adapter_group_invite extends BaseAdapter {
 
     private Context mContext;
     private List<User> users= new ArrayList<User>();
+    private Map<User, Boolean> usersTicked = new HashMap<>();
     private LayoutInflater inflater;
     private int numberOfFollowingInSearchResult;
+    private boolean buttonSwitch= true;
 
     public Adapter_group_invite(Context c, List<User> users, int numberOfFollowingInSearchResult) {
         mContext = c;
         this.users = users;
+
         inflater = LayoutInflater.from(c);
         this.numberOfFollowingInSearchResult=numberOfFollowingInSearchResult;
     }
@@ -84,6 +90,9 @@ public class Adapter_group_invite extends BaseAdapter {
             holder.btn_follow.setSelected(true);
         }
 
+        Boolean previousState = usersTicked.get(users.get(position));
+        holder.btn_follow.setSelected(previousState == null ? false : previousState);
+
         holder.btn_follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,6 +108,7 @@ public class Adapter_group_invite extends BaseAdapter {
                     invite.setGroupFromUser((User) ParseUser.getCurrentUser());
                     invite.setGroupToUser(users.get(position));
                     invite.saveEventually();
+                    usersTicked.put(users.get(position), true);
 
                 } else {
                     ParseQuery<Invite> group = ParseQuery.getQuery(Invite.class);
@@ -117,6 +127,10 @@ public class Adapter_group_invite extends BaseAdapter {
                             }
                         }
                     });
+
+                    usersTicked.put(users.get(position), false);
+
+
                 }
             }
         });

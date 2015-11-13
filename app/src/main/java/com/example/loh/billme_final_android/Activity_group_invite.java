@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -49,6 +50,13 @@ public class Activity_group_invite extends AppCompatActivity {
         ButterKnife.bind(this);
         onLoadingStart();
         loadFriendsList();
+
+        group_invite_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+        });
 
     }
 
@@ -126,6 +134,7 @@ public class Activity_group_invite extends AppCompatActivity {
                             member.setGroupName(groupname);
                             member.saveEventually();
                         }
+
                         Toast.makeText(Activity_group_invite.this, "Invite- "+groupname+" created!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Activity_group_invite.this,Activity_main.class);
                         startActivity(intent);
@@ -140,9 +149,11 @@ public class Activity_group_invite extends AppCompatActivity {
                 //Add new follow relation
                 Group groupinvite = new Group();
                 groupinvite.setACL(aCL);
-                groupinvite.setMember((User)ParseUser.getCurrentUser());
+                groupinvite.setMember((User) ParseUser.getCurrentUser());
                 groupinvite.setGroupName(groupname);
                 groupinvite.saveEventually();
+
+
                 
 
             }else{

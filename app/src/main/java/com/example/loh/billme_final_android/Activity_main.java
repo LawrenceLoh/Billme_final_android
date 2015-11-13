@@ -25,12 +25,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
+import com.example.loh.billme_final_android.Parse_subclass.Invite;
 import com.example.loh.billme_final_android.Parse_subclass.User;
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -187,4 +193,5 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
 
         return myName;
     }
+
 }

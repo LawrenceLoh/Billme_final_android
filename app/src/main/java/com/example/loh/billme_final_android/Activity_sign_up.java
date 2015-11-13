@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -78,8 +79,8 @@ public class Activity_sign_up extends AppCompatActivity {
         password= (EditText) findViewById(R.id.sign_up_password);
         newtonCradleLoading = (NewtonCradleLoading) findViewById(R.id.newton_cradle_loading);
         sign_up_detail= (LinearLayout) findViewById(R.id.sign_up_detail);
-        sign_up_content.setBackgroundColor(getResources().getColor(R.color.white));
-        
+        sign_up_content.setCardBackgroundColor(Color.parseColor("#ffffff"));
+        sign_up_content.setRadius(50);
 
 
 

@@ -20,7 +20,8 @@
         <activity
             android:name=".Activity_login"
             android:label="@string/title_activity_activity_login"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Activity_main"
