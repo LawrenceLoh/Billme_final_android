@@ -31,7 +31,11 @@
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
-        <activity android:name=".Activity_add_bill" >
+        <activity android:name=".Activity_add_bill"
+            android:theme="@style/Theme.MyCompatTheme">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
         <activity android:name=".Activity_status" >
             <intent-filter>
@@ -74,13 +78,22 @@
         <activity
             android:name=".Activity_invite_list"
             android:theme="@style/Theme.MyCompatTheme" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
         <activity
             android:name=".Activity_group_list"
             android:theme="@style/Theme.MyCompatTheme" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
         <activity android:name=".Activity_group"
             android:theme="@style/Theme.MyCompatTheme">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchResultsActivity" />
         </activity>
     </application>
 

@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +40,11 @@ public class Activity_group extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_group);
         groupname= getIntent().getStringExtra("groupname");
+
+        SpannableString s = new SpannableString(groupname);
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+        actionBar.setTitle(s);
         ButterKnife.bind(this);
         onLoadingGroupMember();
     }
@@ -63,7 +70,7 @@ public class Activity_group extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_back) {
-            Intent intent = new Intent(Activity_group.this,Activity_main.class);
+            Intent intent = new Intent(Activity_group.this,Activity_group_list.class);
             startActivity(intent);
             finish();
             return true;

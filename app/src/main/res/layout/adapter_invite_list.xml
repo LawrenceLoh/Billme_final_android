@@ -12,7 +12,8 @@
         android:scaleType="centerCrop"
         app:civ_border_width="0dp"
         android:layout_margin="4dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"/>
 
     <TextView
         android:id="@+id/txt_user_fullName"

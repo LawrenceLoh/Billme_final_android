@@ -1,6 +1,7 @@
 package com.example.loh.billme_final_android;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,9 +89,9 @@ public class Adapter_group_list extends BaseAdapter {
 
             }
         });
-
-        holder.txtview_group_name.setText(groups.get(position).getGroupName());
-
+        Typeface mTypeface = Typeface.createFromAsset(mContext.getAssets(), "nord.ttf");
+        holder.txtview_group_name.setText(Activity_main.sort_name(groups.get(position).getGroupName()));
+        holder.txtview_group_name.setTypeface(mTypeface);
 
 
 

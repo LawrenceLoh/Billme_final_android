@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -41,11 +43,16 @@ public class Activity_group_list extends AppCompatActivity {
         ButterKnife.bind(this);
         onLoadingGroupList();
 
+        SpannableString s = new SpannableString("Groups");
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+        actionBar.setTitle(s);
+
         listView_group_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Activity_group_list.this,Activity_group.class);
-                intent.putExtra("groupname",memberList.get(position).getGroupName());
+                Intent intent = new Intent(Activity_group_list.this, Activity_group.class);
+                intent.putExtra("groupname", memberList.get(position).getGroupName());
                 startActivity(intent);
                 finish();
             }
@@ -74,6 +81,12 @@ public class Activity_group_list extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_back) {
             Intent intent = new Intent(Activity_group_list.this,Activity_main.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+        else if(id== R.id.menu_multiple){
+            Intent intent = new Intent(Activity_group_list.this,Activity_group_invite.class);
             startActivity(intent);
             finish();
             return true;

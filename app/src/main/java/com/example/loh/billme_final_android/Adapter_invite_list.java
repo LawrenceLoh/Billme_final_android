@@ -2,6 +2,7 @@ package com.example.loh.billme_final_android;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +83,11 @@ public class Adapter_invite_list extends BaseAdapter {
             holder = (ViewHolder) v.getTag();
         }
 
-        holder.txtview_user_fullName.setText(inviteInvitation.get(position).getGroupFromUser().getFullName() +"\ninvites you to "+ inviteInvitation.get(position).getGroupName());
+        holder.txtview_user_fullName.setText(Activity_main.sort_name(inviteInvitation.get(position).getGroupFromUser().getFullName()) +"\ninvites you to "+ inviteInvitation.get(position).getGroupName());
         Picasso.with(mContext).load(inviteInvitation.get(position).getGroupFromUser().getProfile().getUrl()).into(holder.img_user_profilePicture);
+        Typeface mTypeface = Typeface.createFromAsset(mContext.getAssets(), "nord.ttf");
+        holder.txtview_user_fullName.setTypeface(mTypeface);
+
         if(position<numberOfFollowingInSearchResult){
             holder.btn_follow.setSelected(false);
         }else{

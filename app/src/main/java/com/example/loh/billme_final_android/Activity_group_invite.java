@@ -3,9 +3,12 @@ package com.example.loh.billme_final_android;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,9 +50,17 @@ public class Activity_group_invite extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_invite);
 
+        SpannableString s = new SpannableString("Invite friend");
+        s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        android.support.v7.app.ActionBar actionBar =getSupportActionBar();
+        actionBar.setTitle(s);
+
         ButterKnife.bind(this);
         onLoadingStart();
         loadFriendsList();
+
+        Typeface mTypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "nord.ttf");
+        group_invite_group_name.setTypeface(mTypeface);
 
         group_invite_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

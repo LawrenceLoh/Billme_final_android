@@ -21,10 +21,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.widget.PullRefreshLayout;
+import com.example.loh.billme_final_android.Parse_subclass.Bill;
+import com.example.loh.billme_final_android.Parse_subclass.Follow;
+import com.example.loh.billme_final_android.Parse_subclass.Group;
 import com.example.loh.billme_final_android.Parse_subclass.Invite;
 import com.example.loh.billme_final_android.Parse_subclass.User;
 import com.parse.FindCallback;
@@ -47,9 +51,11 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
     private PullRefreshLayout refresh;
 
 
+
     @Bind(R.id.content_profile_pic)CircleImageView content_profile_pic;
     @Bind(R.id.content_fullname)TextView content_fullname;
     @Bind(R.id.content_email)TextView content_email;
+    @Bind(R.id.main_bill_list)ListView main_bill_list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +71,7 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
                 refresh.setRefreshing(false);
                 Intent intent = new Intent(Activity_main.this, Activity_add_bill.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -80,11 +87,13 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
 
         SpannableString s = new SpannableString("Home");
         s.setSpan(new com.example.loh.billme_final_android.TypefaceSpan(this, "nord.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
         android.support.v7.app.ActionBar actionBar =getSupportActionBar();
         actionBar.setTitle(s);
         //Bind all,professionally
         ButterKnife.bind(this);
+
+            onLoadingBillList();
+
 
         Typeface mTypeface = Typeface.createFromAsset(getApplicationContext().getAssets(), "nord.ttf");
 
@@ -100,7 +109,8 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         refresh.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(Activity_main.this, "refreshing", Toast.LENGTH_SHORT).show();
+                onLoadingBillList();
+                refresh.setRefreshing(false);
 
             }
         });
@@ -192,6 +202,32 @@ public class Activity_main extends AppCompatActivity implements NavigationView.O
         myName.setCharAt(0, myFullname.charAt(0));
 
         return myName;
+    }
+
+    public void onLoadingBillList(){
+
+        ParseQuery<Bill> bills = ParseQuery.getQuery(Bill.class);
+        bills.whereEqualTo("toUserBill", ParseUser.getCurrentUser());
+        bills.include("fromUserBill");
+
+        bills.findInBackground(new FindCallback<Bill>() {
+            @Override
+            public void done(final List<Bill> bills, ParseException e) {
+
+                try {
+                    ParseQuery<Group> members = ParseQuery.getQuery(Group.class);
+                    members.whereEqualTo("groupName", bills.get(0).getGroup());
+                    members.findInBackground(new FindCallback<Group>() {
+                        @Override
+                        public void done(List<Group> memberNo, ParseException e) {
+                            main_bill_list.setAdapter(new Adapter_main(getApplicationContext(), bills, memberNo.size()));
+
+                        }
+                    });
+                }catch (Exception e1){}
+            }
+        });
+
     }
 
 }
